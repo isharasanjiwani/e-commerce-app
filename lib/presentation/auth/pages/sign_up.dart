@@ -2,19 +2,26 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_project/common/helper/navigator/app_navigator.dart';
 import 'package:flutter_project/common/widget/appbar/app_bar.dart';
-import 'package:flutter_project/presentation/auth/pages/enter_password.dart';
+import 'package:flutter_project/data/auth/models/user_creation_req.dart';
 import 'package:flutter_project/presentation/auth/pages/sign_in.dart';
 
-import '../../../common/widget/basic_app_button.dart';
+import '../../../common/widget/button/basic_app_button.dart';
+import 'gender_and_age_selection.dart';
 
 class SignUpPage extends StatelessWidget {
-  const SignUpPage({super.key});
+
+  SignUpPage({super.key});
+
+  final TextEditingController _firstNameCon = TextEditingController();
+  final TextEditingController _lastNameCon = TextEditingController();
+  final TextEditingController _emailCon = TextEditingController();
+  final TextEditingController _passwordCon = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: const BasicAppBar(),
-      body: Padding(
+      body: SingleChildScrollView(
         padding: const EdgeInsets.symmetric(
             horizontal: 16,
             vertical: 40
@@ -52,8 +59,9 @@ class SignUpPage extends StatelessWidget {
   }
 
   Widget _firstNameField(BuildContext context){
-    return const TextField(
-      decoration: InputDecoration(
+    return TextField(
+      controller: _firstNameCon,
+      decoration: const InputDecoration(
         hintText: 'First Name',
         contentPadding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 20.0),
       ),
@@ -61,8 +69,9 @@ class SignUpPage extends StatelessWidget {
   }
 
   Widget _lastNameField(BuildContext context){
-    return const TextField(
-      decoration: InputDecoration(
+    return TextField(
+      controller: _lastNameCon,
+      decoration: const InputDecoration(
         hintText: 'Last Name',
         contentPadding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 20.0),
       ),
@@ -70,8 +79,9 @@ class SignUpPage extends StatelessWidget {
   }
 
   Widget _emailField(BuildContext context){
-    return const TextField(
-      decoration: InputDecoration(
+    return TextField(
+      controller: _emailCon,
+      decoration: const InputDecoration(
         hintText: 'Enter Email',
         contentPadding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 20.0),
       ),
@@ -79,8 +89,9 @@ class SignUpPage extends StatelessWidget {
   }
 
   Widget _passwordField(BuildContext context){
-    return const TextField(
-      decoration: InputDecoration(
+    return TextField(
+      controller: _passwordCon,
+      decoration: const InputDecoration(
           hintText: 'Password',
           contentPadding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 20.0),
       ),
@@ -92,7 +103,17 @@ class SignUpPage extends StatelessWidget {
   Widget _continueButton(BuildContext context) {
     return BasicAppButton(
       onPressed: (){
-        AppNavigator.pushReplacement(context, const EnterPasswordPage());
+        AppNavigator.pushReplacement(
+            context,
+            GenderAndAgeSelectionPage(
+              userCreationReq: UserCreationReq(
+                  firstName: _firstNameCon.text,
+                  lastName: _lastNameCon.text,
+                  email: _emailCon.text,
+                  password: _passwordCon.text
+              ),
+            )
+        );
       },
       title: 'Continue',
     );
@@ -103,7 +124,7 @@ class SignUpPage extends StatelessWidget {
       text: TextSpan(
           children: [
             const TextSpan(
-                text: 'Do you have an account?'
+                text: 'Do you have an account? '
             ),
             TextSpan(
                 text: 'SignIn',
@@ -111,7 +132,7 @@ class SignUpPage extends StatelessWidget {
                   AppNavigator.pushReplacement(context, const SignInPage());
                 },
                 style: const TextStyle(
-                    fontWeight: FontWeight.bold
+                  fontWeight: FontWeight.bold
                 )
             )
           ]

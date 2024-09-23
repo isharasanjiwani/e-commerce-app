@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_project/core/configs/theme/app_colors.dart';
 
 class BasicAppButton extends StatelessWidget {
 
@@ -18,7 +19,8 @@ class BasicAppButton extends StatelessWidget {
     return ElevatedButton(
         onPressed: onPressed,
         style: ElevatedButton.styleFrom(
-          minimumSize: Size.fromHeight(height ?? 50)
+          minimumSize: Size.fromHeight(height ?? 50),
+          backgroundColor: AppColors.primary
         ),
         child: Text(
           title,

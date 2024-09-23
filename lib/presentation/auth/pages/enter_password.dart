@@ -4,7 +4,7 @@ import 'package:flutter_project/common/helper/navigator/app_navigator.dart';
 import 'package:flutter_project/common/widget/appbar/app_bar.dart';
 import 'package:flutter_project/presentation/auth/pages/forgot_password.dart';
 
-import '../../../common/widget/basic_app_button.dart';
+import '../../../common/widget/button/basic_app_button.dart';
 
 class EnterPasswordPage extends StatelessWidget {
   const EnterPasswordPage({super.key});
