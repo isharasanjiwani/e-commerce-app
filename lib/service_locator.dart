@@ -2,6 +2,8 @@ import 'package:flutter_project/data/auth/repository/auth_repository_impl.dart';
 import 'package:flutter_project/data/auth/source/auth_firebase_service.dart';
 import 'package:flutter_project/domain/auth/repository/auth.dart';
 import 'package:flutter_project/domain/auth/usecases/get_ages.dart';
+import 'package:flutter_project/domain/auth/usecases/send_password_reset_email.dart';
+import 'package:flutter_project/domain/auth/usecases/sign_in.dart';
 import 'package:flutter_project/domain/auth/usecases/signup.dart';
 import 'package:get_it/get_it.dart';
 
@@ -18,4 +20,6 @@ Future<void> initializeDependencies() async {
   //Use cases
   s1.registerSingleton<SignupUseCase>(SignupUseCase());
   s1.registerSingleton<GetAgesUseCase>(GetAgesUseCase());
+  s1.registerSingleton<SignInUseCase>(SignInUseCase());
+  s1.registerSingleton<SendPasswordResetEmailUseCase>(SendPasswordResetEmailUseCase());
 }
