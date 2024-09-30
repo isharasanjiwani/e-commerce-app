@@ -7,6 +7,8 @@ import 'package:flutter_project/presentation/auth/pages/sign_in.dart';
 import 'package:flutter_project/presentation/splash/bloc/splash_cubit.dart';
 import 'package:flutter_project/presentation/splash/bloc/splash_state.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+
+import '../../home/pages/home.dart';
 class SplashPage extends StatelessWidget {
   const SplashPage({super.key});
 
@@ -17,7 +19,7 @@ class SplashPage extends StatelessWidget {
         if (state is UnAuthenticated) {
           AppNavigator.pushReplacement(context, SignInPage());
         } else if (state is Authenticated){
-          //AppNavigator.pushReplacement(context, HomePage());
+          AppNavigator.pushReplacement(context, const HomePage());
         }
       },
       child: Scaffold(

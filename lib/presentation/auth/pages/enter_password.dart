@@ -9,6 +9,7 @@ import 'package:flutter_project/data/auth/models/user_sign_in_req.dart';
 import 'package:flutter_project/domain/auth/usecases/sign_in.dart';
 import 'package:flutter_project/presentation/auth/pages/forgot_password.dart';
 import 'package:flutter_project/presentation/auth/pages/password_reset_email_page.dart';
+import 'package:flutter_project/presentation/home/pages/home.dart';
 
 import '../../../common/bloc/button/button_state.dart';
 import '../../../common/widget/button/basic_app_button.dart';
@@ -40,30 +41,22 @@ class EnterPasswordPage extends StatelessWidget {
                 var snackBar = SnackBar(content: Text(state.errorMessage), behavior: SnackBarBehavior.floating);
                 ScaffoldMessenger.of(context).showSnackBar(snackBar);
               }
-            },
-            child: BlocListener<ButtonStateCubit, ButtonState>(
-              listener: (context, state) {
-                if(state is ButtonFailureState){
-                  var snackBar = SnackBar(content: Text(state.errorMessage), behavior: SnackBarBehavior.floating);
-                  ScaffoldMessenger.of(context).showSnackBar(snackBar);
-                }
 
-                if(state is ButtonSuccessState){
-                  AppNavigator.pushReplacement(context, const PasswordResetEmailPage());
-                }
-              },
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  _signInText(context),
-                  const SizedBox(height: 20,),
-                  _passwordField(context),
-                  const SizedBox(height: 20,),
-                  _continueButton(context),
-                  const SizedBox(height: 20,),
-                  _forgotPassword(context)
-                ],
-              ),
+              if(state is ButtonSuccessState){
+                AppNavigator.pushAndRemove(context, const HomePage());
+              }
+            },
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                _signInText(context),
+                const SizedBox(height: 20,),
+                _passwordField(context),
+                const SizedBox(height: 20,),
+                _continueButton(context),
+                const SizedBox(height: 20,),
+                _forgotPassword(context)
+              ],
             ),
           ),
         ),
